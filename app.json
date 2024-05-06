@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "workshop",
-    "slug": "workshop",
+    "name": "appjsworkshop2024",
+    "slug": "appjsworkshop2024",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,6 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "scheme": "appjsworkshop2024",
     "ios": {
       "supportsTablet": true
     },
@@ -22,6 +23,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://n"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
