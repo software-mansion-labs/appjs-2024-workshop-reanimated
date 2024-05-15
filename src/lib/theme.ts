@@ -13,6 +13,8 @@ export const colors = {
   purple: "#683FC2",
   blue: "#007AFF",
   green: "#34C759",
+  primary: "#001A72",
+  border: "#C1C6E5",
 };
 
 type ColorShades = {
