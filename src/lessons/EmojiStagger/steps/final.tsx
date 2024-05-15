@@ -24,21 +24,21 @@ const emojis = ["👍", "👎", "😂", "😢", "😡", "😲"];
 export function EmojiStaggerLesson({ message }: Props) {
   const { currentPopupId, setCurrentPopupId } = useChat();
 
-  const pressing = useSharedValue(false);
+  const pressed = useSharedValue(false);
   const longPress = Gesture.LongPress()
     .onBegin(() => {
-      pressing.value = true;
+      pressed.value = true;
     })
     .onStart(() => {
       runOnJS(setCurrentPopupId)(message.id);
     })
     .onFinalize(() => {
-      pressing.value = false;
+      pressed.value = false;
     });
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [
-      { scale: withTiming(pressing.value ? 0.96 : 1, { duration: 200 }) },
+      { scale: withTiming(pressed.value ? 0.96 : 1, { duration: 200 }) },
     ],
   }));
 
