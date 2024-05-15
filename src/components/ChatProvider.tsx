@@ -1,13 +1,13 @@
 import React, { Dispatch, createContext, useContext, useState } from "react";
 
 interface ChatContextType {
-  emojiPopupId: string | undefined;
-  setEmojiPopupId: Dispatch<string | undefined>;
+  currentPopupId: string | undefined;
+  setCurrentPopupId: Dispatch<string | undefined>;
 }
 
 export const ChatContext = createContext<ChatContextType>({
-  emojiPopupId: undefined,
-  setEmojiPopupId: () => {},
+  currentPopupId: undefined,
+  setCurrentPopupId: () => {},
 });
 
 interface ChatProviderProps {
@@ -16,10 +16,10 @@ interface ChatProviderProps {
 
 export const ChatProvider = ({ children }: ChatProviderProps) => {
   // emoji popup id is the message id of the message that the emoji popup is attached to
-  const [emojiPopupId, setEmojiPopupId] = useState<string | undefined>();
+  const [currentPopupId, setCurrentPopupId] = useState<string | undefined>();
 
   return (
-    <ChatContext.Provider value={{ emojiPopupId, setEmojiPopupId }}>
+    <ChatContext.Provider value={{ currentPopupId, setCurrentPopupId }}>
       {children}
     </ChatContext.Provider>
   );

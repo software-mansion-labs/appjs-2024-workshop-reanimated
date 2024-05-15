@@ -21,9 +21,8 @@ interface Props {
 
 const emojis = ["👍", "👎", "😂", "😢", "😡", "😲"];
 
-
 export function EmojiStaggerLesson({ message }: Props) {
-  const { emojiPopupId, setEmojiPopupId } = useChat();
+  const { currentPopupId, setCurrentPopupId } = useChat();
 
   const pressing = useSharedValue(false);
   const longPress = Gesture.LongPress()
@@ -31,7 +30,7 @@ export function EmojiStaggerLesson({ message }: Props) {
       pressing.value = true;
     })
     .onStart(() => {
-      runOnJS(setEmojiPopupId)(message.id);
+      runOnJS(setCurrentPopupId)(message.id);
     })
     .onFinalize(() => {
       pressing.value = false;
@@ -65,7 +64,7 @@ export function EmojiStaggerLesson({ message }: Props) {
           </Text>
         </Animated.View>
       </GestureDetector>
-      {emojiPopupId === message.id && (
+      {currentPopupId === message.id && (
         <View style={styles.emojiPopupContainer}>
           <Animated.View
             entering={FadeInDown.duration(200)}

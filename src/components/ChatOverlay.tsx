@@ -2,14 +2,14 @@ import { useChat } from "@/components/ChatProvider";
 import { Pressable, StyleSheet } from "react-native";
 
 export function Overlay() {
-  const { emojiPopupId, setEmojiPopupId } = useChat();
+  const { currentPopupId, setCurrentPopupId } = useChat();
 
   return (
-    emojiPopupId && (
+    currentPopupId && (
       <Pressable
         style={styles.overlay}
         onPress={() => {
-          setEmojiPopupId(undefined);
+          setCurrentPopupId(undefined);
         }}
       />
     )
