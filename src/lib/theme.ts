@@ -14,6 +14,8 @@ export const colors = {
   blue: "#007AFF",
   green: "#34C759",
   primary: "#001A72",
+  accent: "#782AEB",
+  overlay: "rgba(98, 98, 98, 0.6)",
   border: "#C1C6E5",
 };
 

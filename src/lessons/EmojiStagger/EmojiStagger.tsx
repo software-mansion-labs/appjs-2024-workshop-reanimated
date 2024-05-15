@@ -3,6 +3,7 @@ import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { useChat } from "@/components/ChatProvider";
 import type { MessageType } from "@/lib/mock";
+import { colors } from "@lib/theme";
 
 interface Props {
   message: MessageType;
@@ -72,13 +73,13 @@ const styles = StyleSheet.create({
   },
   messageMe: {
     alignSelf: "flex-end",
-    backgroundColor: "#782AEB",
+    backgroundColor: colors.accent,
   },
   messageThem: {
     alignSelf: "flex-start",
     backgroundColor: "white",
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "#C1C6E5",
+    borderColor: colors.border,
   },
   emojiPopupContainer: {
     position: "absolute",
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   emojiPopupWrapper: {
     top: -45,
     height: 50,
-    backgroundColor: "rgba(98, 98, 98, 0.6)",
+    backgroundColor: colors.overlay,
     borderRadius: 999,
     paddingHorizontal: 16,
   },
