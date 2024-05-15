@@ -12,8 +12,8 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-import type { MessageType } from "@/components/Chat";
 import { useChat } from "@/components/ChatProvider";
+import type { MessageType } from "@/lib/mock";
 
 interface Props {
   message: MessageType;
