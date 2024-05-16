@@ -9,13 +9,11 @@ import {
   ListRenderItemInfo,
   StyleSheet,
   Text,
+  View,
 } from "react-native";
 import Animated, {
   SharedValue,
-  interpolate,
-  interpolateColor,
   useAnimatedScrollHandler,
-  useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
 
@@ -26,8 +24,7 @@ const AnimatedFlatList =
 export function Interpolation() {
   const scrollX = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler((e) => {
-    scrollX.value =
-      Math.round(e.contentOffset.x) / (layout.itemSize + layout.spacing);
+    scrollX.value = e.contentOffset.x;
   });
   return (
     <Container style={styles.container}>
@@ -42,7 +39,6 @@ export function Interpolation() {
         decelerationRate={"fast"}
         renderItem={(props) => <Item {...props} scrollX={scrollX} />}
         onScroll={onScroll}
-        scrollEventThrottle={1000 / 60}
       />
     </Container>
   );
@@ -53,40 +49,11 @@ type ItemProps = ListRenderItemInfo<ItemType> & {
 };
 
 export function Item({ item, index, scrollX }: ItemProps) {
-  const stylez = useAnimatedStyle(() => {
-    return {
-      backgroundColor: interpolateColor(
-        scrollX.value,
-        [index - 1, index, index + 1],
-        [colors.purple, colors.overlay, colors.green]
-      ),
-      transform: [
-        {
-          scale: interpolate(
-            scrollX.value,
-            [index - 1, index, index + 1],
-            // targeting more on when the items moves more by index on the left
-            // [index - 1, index, index + 1, index + 2],
-            // targeting more on when the items moves more by index on the right
-            // [index + 2, index - 1, index, index + 1],
-            [0.9, 1, 0.9]
-            // For this example, the next index+-2 will be 0.9-1 = -0.1 smaller than the current index
-            // Clamp to 1 on left
-            // [0.9, 1, 1],
-            // Clamp to 1 on right
-            // [1, 1, 0.9],
-            // This is because v1 === v0 and the lerp will return the same value, this is equivalent to clamp
-            // but we control more, because we can revert this for `index-3` for example.
-          ),
-        },
-      ],
-    };
-  });
   return (
-    <Animated.View style={[styles.item, stylez]}>
+    <View style={styles.item}>
       <Text>{item.label}</Text>
       <AnimatedText text={scrollX} />
-    </Animated.View>
+    </View>
   );
 }
 

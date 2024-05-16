@@ -128,9 +128,9 @@ export const messages: MessageType[] = [
   },
 ];
 
-export const items = [...Array(30).keys()].map((index) => {
+export const items = [...Array(12).keys()].map((index) => {
   return {
     key: `item-${index}`,
-    label: `Item ${index + 1}`,
+    label: `Item ${index}`,
   };
 });

@@ -1,6 +1,9 @@
 import { Dimensions } from "react-native";
 
 const { width } = Dimensions.get("screen");
+
+const moreItems = false; // Set to true to see more items when doing the interpolation lesson
+
 export const layout = {
   spacing: 8,
   radius: 8,
@@ -11,7 +14,8 @@ export const layout = {
   contactListItemHeight: 36 + 8 * 2, // layout.avatarSize + layout.spacing * 2
   contactListSectionHeaderHeight: 50,
   // Interpolation
-  itemSize: width * 0.75,
+  itemSize: moreItems ? width * 0.25 : width * 0.75,
+  screenWidth: width,
 };
 
 export const colors = {

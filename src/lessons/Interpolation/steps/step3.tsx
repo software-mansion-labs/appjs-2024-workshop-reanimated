@@ -54,32 +54,36 @@ type ItemProps = ListRenderItemInfo<ItemType> & {
 
 export function Item({ item, index, scrollX }: ItemProps) {
   const stylez = useAnimatedStyle(() => {
+    // Next Position, Current Position, Previous Position
+    // Slide from right to left, -, Slide from left to right
+    // Right, Center, Left
+    // Current item is moving to the left -> increasing the index (index + 1)
+    // Current item is moving to the right -> decreasing the index (index -1)
+    // This is the position of the current slide relative to the entire list of items and the
+    // interval when the item might be visible on the screen, that's why
+    // we target it. If, for example, that there are 5 possible items on the screen
+    // and you want to apply a different style to the current item, you would target
+    // the index+-2 as well and, in case you don't target index+-2, the interpolation
+    // will estimate the value for this range (we call this Extrapolate.EXTEND)
+    // v0 + t * (v1 - v0) where:
+    // v0 - prev value (value at index -+ 1)
+    // v1 - next value (value at index -+ 2)
+    // t - scrollX value
+    // If you are interested in just the current domain, even if the scrollX value or `t` moves
+    // outside of it, you can Extrapolate.CLAMP the interpolation and this will stick with the last v0 value
+    // making v1 = v0 so, in other words, v0 + t * (v1 - v0) = v0 + t * (v0 - v0) = v0 + 0 = v0
+    // [index - 1, index, index + 1],
     return {
+      opacity: interpolate(
+        scrollX.value,
+        [index - 1, index, index + 1],
+        [0.75, 1, 0.75]
+      ),
       backgroundColor: interpolateColor(
         scrollX.value,
         [index - 1, index, index + 1],
-        [colors.purple, colors.overlay, colors.green]
+        [colors.blue, colors.overlay, colors.green]
       ),
-      transform: [
-        {
-          scale: interpolate(
-            scrollX.value,
-            [index - 1, index, index + 1],
-            // targeting more on when the items moves more by index on the left
-            // [index - 1, index, index + 1, index + 2],
-            // targeting more on when the items moves more by index on the right
-            // [index + 2, index - 1, index, index + 1],
-            [0.9, 1, 0.9]
-            // For this example, the next index+-2 will be 0.9-1 = -0.1 smaller than the current index
-            // Clamp to 1 on left
-            // [0.9, 1, 1],
-            // Clamp to 1 on right
-            // [1, 1, 0.9],
-            // This is because v1 === v0 and the lerp will return the same value, this is equivalent to clamp
-            // but we control more, because we can revert this for `index-3` for example.
-          ),
-        },
-      ],
     };
   });
   return (
