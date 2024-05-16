@@ -28,9 +28,9 @@ const alphabetRef = useAnimatedRef<View>()
 
 ```jsx
 // float value (used for animation)
-const scrollableIndex = useSharedValue(0)
+const scrollableIndex = useSharedValue(0);
 // rounded value (used to snap to position)
-const activeScrollIndex = useSharedValue(0)
+const activeScrollIndex = useSharedValue(0);
 ```
 
 </details>
@@ -41,15 +41,15 @@ const activeScrollIndex = useSharedValue(0)
 </summary>
 
 ```jsx
-const alphabetLayout = measure(alphabetRef)
+const alphabetLayout = measure(alphabetRef);
 if (!alphabetLayout) {
-  return
+  return;
 }
 y.value = clamp(
   (y.value += ev.changeY),
   alphabetLayout.y, // take into account the knob size
-  alphabetLayout.height - layout.knobSize,
-)
+  alphabetLayout.height - layout.knobSize
+);
 ```
 
 </details>
@@ -76,18 +76,19 @@ scrolling_position is between [2,3]
 ```jsx
 // This is snapTo by the same interval. This will snap to the nearest
 // letter based on the knob position.
-const snapBy = (alphabetLayout.height - layout.knobSize) / (alphabet.length - 1)
+const snapBy =
+  (alphabetLayout.height - layout.knobSize) / (alphabet.length - 1);
 
-scrollableIndex.value = y.value / snapBy
-const snapToIndex = Math.round(scrollableIndex.value)
+scrollableIndex.value = y.value / snapBy;
+const snapToIndex = Math.round(scrollableIndex.value);
 
 // Ensure that we don't trigger scroll to the same index.
 if (snapToIndex === activeScrollIndex.value) {
-  return
+  return;
 }
 
 // This is to avoid triggering scrolling to the same index.
-activeScrollIndex.value = snapToIndex
+activeScrollIndex.value = snapToIndex;
 ```
 
 </details>
@@ -103,23 +104,23 @@ activeScrollIndex.value = snapToIndex
 ```jsx
 const snapIndicatorTo = (index: number) => {
   runOnUI(() => {
-    'worklet'
+    "worklet";
 
     if (scrollableIndex.value === index || isInteracting.value) {
-      return
+      return;
     }
 
-    const alphabetLayout = measure(alphabetRef)
+    const alphabetLayout = measure(alphabetRef);
     if (!alphabetLayout) {
-      return
+      return;
     }
     const snapBy =
-      (alphabetLayout.height - layout.knobSize) / (alphabet.length - 1)
-    const snapTo = index * snapBy
-    y.value = withTiming(snapTo)
-    scrollableIndex.value = withTiming(index)
-  })()
-}
+      (alphabetLayout.height - layout.knobSize) / (alphabet.length - 1);
+    const snapTo = index * snapBy;
+    y.value = withTiming(snapTo);
+    scrollableIndex.value = withTiming(index);
+  })();
+};
 ```
 
 </details>
@@ -233,8 +234,8 @@ const scrollToLocation = (index: number) => {
     itemIndex: 0,
     sectionIndex: index,
     animated: false,
-  })
-}
+  });
+};
 ```
 
 </details>
@@ -248,7 +249,7 @@ const scrollToLocation = (index: number) => {
 </summary>
 
 ```jsx
-runOnJS(scrollToLocation)(snapToIndex)
+runOnJS(scrollToLocation)(snapToIndex);
 ```
 
 </details>
@@ -284,4 +285,4 @@ onViewableItemsChanged={({ viewableItems }) => {
 
 ## Next step
 
-**Go to: [Shared Element Transition DnD](../SharedElementTransitionDnd/)**
+**Go to: [Emoji Stagger](../EmojiStagger/)**
