@@ -1,8 +1,5 @@
-
-import React from "react";
-
-import { ArrowLeftIcon, SettingsIcon } from "@lib/icons";
-import { colors } from "@lib/theme";
+import { ArrowLeftIcon, SettingsIcon } from "@/lib/icons";
+import { colors } from "@/lib/theme";
 import { Link } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,7 +8,7 @@ export function Header() {
   return (
     <SafeAreaView style={styles.headerContainer} edges={["top"]}>
       <View style={styles.wrapper}>
-        <Link href="/" asChild>
+        <Link href='/' asChild>
           <Pressable>
             <ArrowLeftIcon />
           </Pressable>

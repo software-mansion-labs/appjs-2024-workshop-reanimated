@@ -1,5 +1,5 @@
-import { layout } from '@lib/theme'
-import { Text, View } from 'react-native'
+import { layout } from "@/lib/theme";
+import { Text, View } from "react-native";
 
 export function ContactsListHeader({ title }: { title: string }) {
   return (
@@ -7,11 +7,10 @@ export function ContactsListHeader({ title }: { title: string }) {
       <Text
         style={{
           fontSize: 42,
-          fontWeight: '900',
-        }}
-      >
+          fontWeight: "900",
+        }}>
         {title}
       </Text>
     </View>
-  )
+  );
 }

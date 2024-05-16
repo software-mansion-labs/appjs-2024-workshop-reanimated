@@ -127,3 +127,10 @@ export const messages: MessageType[] = [
     from: "them",
   },
 ];
+
+export const items = [...Array(30).keys()].map((index) => {
+  return {
+    key: `item-${index}`,
+    label: `Item ${index + 1}`,
+  };
+});

@@ -36,8 +36,8 @@ export const routes: RouteMeta[] = [
     subtitle: "Lesson 6",
   },
   {
-    href: "MarqueeLesson",
-    title: "Marquee 👉",
-    subtitle: "Lesson 7 [bonus]",
+    href: "Interpolation",
+    title: "Interpolation 👉",
+    subtitle: "Lesson 7",
   },
 ];

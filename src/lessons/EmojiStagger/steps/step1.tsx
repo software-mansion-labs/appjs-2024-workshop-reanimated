@@ -1,4 +1,3 @@
-import React from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
@@ -10,7 +9,7 @@ import Animated, {
 
 import { useChat } from "@/components/ChatProvider";
 import type { MessageType } from "@/lib/mock";
-import { colors } from "@lib/theme";
+import { colors } from "@/lib/theme";
 
 interface Props {
   message: MessageType;
@@ -47,16 +46,14 @@ export function EmojiStaggerLesson({ message }: Props) {
             styles.message,
             message.from === "me" ? styles.messageMe : styles.messageThem,
             animatedStyles,
-          ]}
-        >
+          ]}>
           <Text
             style={[
               styles.messageText,
               message.from === "me"
                 ? styles.messageTextMe
                 : styles.messageTextThem,
-            ]}
-          >
+            ]}>
             {message.message}
           </Text>
         </Animated.View>

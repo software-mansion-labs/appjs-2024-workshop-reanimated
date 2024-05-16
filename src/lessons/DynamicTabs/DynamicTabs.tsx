@@ -1,16 +1,16 @@
-import { Container } from '@components/Container'
-import { tabsList } from '@lib/mock'
-import { hitSlop } from '@lib/reanimated'
-import { colorShades, layout } from '@lib/theme'
-import { memo } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import Animated from 'react-native-reanimated'
+import { Container } from "@/components/Container";
+import { tabsList } from "@/lib/mock";
+import { hitSlop } from "@/lib/reanimated";
+import { colorShades, layout } from "@/lib/theme";
+import { memo } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
 
 type TabsProps = {
-  name: string
-  isActiveTabIndex: boolean
-}
+  name: string;
+  isActiveTabIndex: boolean;
+};
 
 const Tab = memo(({ name, isActiveTabIndex }: TabsProps) => {
   return (
@@ -18,34 +18,32 @@ const Tab = memo(({ name, isActiveTabIndex }: TabsProps) => {
       <TouchableOpacity
         hitSlop={hitSlop}
         style={{ marginHorizontal: layout.spacing }}
-        onPress={() => {}}
-      >
+        onPress={() => {}}>
         <Text>{name}</Text>
       </TouchableOpacity>
     </View>
-  )
-})
+  );
+});
 
 // This component should receive the selected tab measurements as props
 function Indicator() {
-  return <Animated.View style={[styles.indicator]} />
+  return <Animated.View style={[styles.indicator]} />;
 }
 export function DynamicTabsLesson({
   selectedTabIndex = 0,
   onChangeTab,
 }: {
-  selectedTabIndex?: number
+  selectedTabIndex?: number;
   // Call this function when the tab changes
   // Don't forget to check if the function exists before calling it
-  onChangeTab?: (index: number) => void
+  onChangeTab?: (index: number) => void;
 }) {
   return (
     <Container>
       <ScrollView
         horizontal
         style={{ flexGrow: 0 }}
-        contentContainerStyle={styles.scrollViewContainer}
-      >
+        contentContainerStyle={styles.scrollViewContainer}>
         {tabsList.map((tab, index) => (
           <Tab
             key={`tab-${tab}-${index}`}
@@ -56,12 +54,12 @@ export function DynamicTabsLesson({
         <Indicator />
       </ScrollView>
     </Container>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   indicator: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: colorShades.purple.base,
     height: 4,
     borderRadius: 2,
@@ -75,4 +73,4 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     paddingVertical: layout.spacing * 2,
   },
-})
+});

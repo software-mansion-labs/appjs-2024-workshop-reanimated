@@ -1,4 +1,4 @@
-import { EmojiStagger } from "@lessons/EmojiStagger";
+import { EmojiStagger } from "@/lessons/EmojiStagger";
 
 export default function Page() {
   return <EmojiStagger />;

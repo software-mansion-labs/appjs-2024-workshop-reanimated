@@ -1,3 +1,6 @@
+import { Dimensions } from "react-native";
+
+const { width } = Dimensions.get("screen");
 export const layout = {
   spacing: 8,
   radius: 8,
@@ -7,6 +10,8 @@ export const layout = {
   imageHeight: 260,
   contactListItemHeight: 36 + 8 * 2, // layout.avatarSize + layout.spacing * 2
   contactListSectionHeaderHeight: 50,
+  // Interpolation
+  itemSize: width * 0.75,
 };
 
 export const colors = {

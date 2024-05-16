@@ -24,7 +24,3 @@ _Placeholder_
 
 </details>
 <br/>
-
-## Next step
-
-**Go to: [Interpolation](../Interpolation/)**

@@ -1,9 +1,8 @@
-import React from "react";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { useChat } from "@/components/ChatProvider";
 import type { MessageType } from "@/lib/mock";
-import { colors } from "@lib/theme";
+import { colors } from "@/lib/theme";
 
 interface Props {
   message: MessageType;
@@ -21,16 +20,14 @@ export function EmojiStaggerLesson({ message }: Props) {
           styles.message,
           message.from === "me" ? styles.messageMe : styles.messageThem,
         ]}
-        onPress={() => setCurrentPopupId(message.id)}
-      >
+        onPress={() => setCurrentPopupId(message.id)}>
         <Text
           style={[
             styles.messageText,
             message.from === "me"
               ? styles.messageTextMe
               : styles.messageTextThem,
-          ]}
-        >
+          ]}>
           {message.message}
         </Text>
       </Pressable>

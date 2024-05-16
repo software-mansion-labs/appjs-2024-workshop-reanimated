@@ -1,8 +1,8 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { Container } from "@components/Container";
-import { routes } from "@lib/routes";
-import { layout } from "@lib/theme";
+import { Container } from "@/components/Container";
+import { routes } from "@/lib/routes";
+import { layout } from "@/lib/theme";
 import { router } from "expo-router";
 
 export default function HomeScreen() {
