@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 
-const myImages = images.splice(0, 4);
+const myImages = images.splice(0, 6)
 
 export function Cards() {
   return (
