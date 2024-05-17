@@ -66,14 +66,13 @@ export function SkiaThemeCurtain() {
 
   useEffect(() => {
     const listener = Appearance.addChangeListener(() => {
-      console.log('theme changed!')
+      console.log("theme changed!");
     });
 
     return () => {
       listener.remove();
     };
   }, []);
-
 
   return (
     <View style={styles.fill}>
