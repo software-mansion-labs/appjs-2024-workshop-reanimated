@@ -20,9 +20,16 @@ export function Interpolation() {
         horizontal
         contentContainerStyle={{
           gap: layout.spacing,
+          // We are creating horizontal spacing to align the list in the center
+          // We don't subtract the spacing here because gap is not applied to the
+          // first item on the left and last item on the right.
           paddingHorizontal: (layout.screenWidth - layout.itemSize) / 2,
         }}
+        // We can't use pagingEnabled because the item is smaller than the viewport width
+        // in our case itemSize and we add the spacing because we have the gap
+        // added between the items in the contentContainerStyle
         snapToInterval={layout.itemSize + layout.spacing}
+        // This is to snap faster to the closest item
         decelerationRate={"fast"}
         renderItem={(props) => <Item {...props} />}
       />
@@ -30,7 +37,9 @@ export function Interpolation() {
   );
 }
 
-export function Item({ item, index }: ListRenderItemInfo<ItemType>) {
+type ItemProps = ListRenderItemInfo<ItemType> & {};
+
+export function Item({ item, index }: ItemProps) {
   return (
     <View style={styles.item}>
       <Text>{item.label}</Text>
