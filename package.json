@@ -9,10 +9,9 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-navigation/native": "^6.1.17",
-    "@react-navigation/native-stack": "^6.9.26",
+    "@react-navigation/native": "^6.0.2",
     "@shopify/react-native-skia": "1.2.3",
-    "expo": "~51.0.7",
+    "expo": "~51.0.8",
     "expo-router": "~3.5.14",
     "expo-splash-screen": "~0.27.4",
     "expo-status-bar": "~1.12.1",

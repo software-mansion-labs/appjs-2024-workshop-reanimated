@@ -1,4 +1,10 @@
-import { useEffect } from "react";
+import {
+  Canvas,
+  Image,
+  makeImageFromView,
+  type SkImage,
+} from "@shopify/react-native-skia";
+import { useEffect, useRef, useState } from "react";
 import {
   Appearance,
   Dimensions,
@@ -59,7 +65,13 @@ vec4 transition (vec2 uv) {
 
 export function SkiaThemeCurtain() {
   const colorScheme = useColorScheme();
-  const changeTheme = () => {
+
+  const ref = useRef<ScrollView>(null);
+  const [firstSnapshot, setFirstSnapshot] = useState<SkImage | null>(null);
+
+  const changeTheme = async () => {
+    const snapshot = await makeImageFromView(ref);
+    setFirstSnapshot(snapshot);
     Appearance.setColorScheme(colorScheme === "light" ? "dark" : "light");
   };
 
@@ -75,7 +87,18 @@ export function SkiaThemeCurtain() {
 
   return (
     <View style={styles.fill}>
+      {firstSnapshot && (
+        <Canvas style={styles.overlay}>
+          <Image
+            image={firstSnapshot}
+            fit="cover"
+            width={width}
+            height={height}
+          />
+        </Canvas>
+      )}
       <ScrollView
+        ref={ref}
         style={[
           styles.container,
           { height: height },

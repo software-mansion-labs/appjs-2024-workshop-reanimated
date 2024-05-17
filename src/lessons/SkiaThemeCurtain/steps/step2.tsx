@@ -1,4 +1,10 @@
-import { useEffect } from "react";
+import {
+  Canvas,
+  Image,
+  makeImageFromView,
+  type SkImage,
+} from "@shopify/react-native-skia";
+import { useEffect, useRef, useState } from "react";
 import {
   Appearance,
   Dimensions,
@@ -8,6 +14,7 @@ import {
   View,
   useColorScheme,
 } from "react-native";
+import { runOnJS, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { Cards } from "@/components/Cards";
 import { Header } from "@/components/Header";
@@ -58,14 +65,34 @@ vec4 transition (vec2 uv) {
 `;
 
 export function SkiaThemeCurtain() {
+  const progress = useSharedValue(0);
   const colorScheme = useColorScheme();
-  const changeTheme = () => {
+
+  const ref = useRef<ScrollView>(null);
+  const [firstSnapshot, setFirstSnapshot] = useState<SkImage | null>(null);
+  const [secondSnapshot, setSecondSnapshot] = useState<SkImage | null>(null);
+
+  const changeTheme = async () => {
+    progress.value = 0;
+    const snapshot = await makeImageFromView(ref);
+    setFirstSnapshot(snapshot);
     Appearance.setColorScheme(colorScheme === "light" ? "dark" : "light");
   };
 
   useEffect(() => {
     const listener = Appearance.addChangeListener(() => {
-      console.log("theme changed!");
+      setTimeout(async () => {
+        const snapshot = await makeImageFromView(ref);
+        setSecondSnapshot(snapshot);
+        progress.value = withTiming(
+          1,
+          { duration: TRANSITION_DURATION },
+          () => {
+            runOnJS(setFirstSnapshot)(null);
+            runOnJS(setSecondSnapshot)(null);
+          },
+        );
+      }, 30);
     });
 
     return () => {
@@ -73,9 +100,37 @@ export function SkiaThemeCurtain() {
     };
   }, []);
 
+  const isTransitioning = firstSnapshot !== null && secondSnapshot !== null;
+  if (isTransitioning) {
+    return (
+      <View style={styles.fill}>
+        <Canvas style={{ height: height }}>
+          <Image
+            image={secondSnapshot}
+            fit="cover"
+            width={width}
+            height={height}
+          />
+        </Canvas>
+        <StatusBar translucent />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.fill}>
+      {firstSnapshot && (
+        <Canvas style={styles.overlay}>
+          <Image
+            image={firstSnapshot}
+            fit="cover"
+            width={width}
+            height={height}
+          />
+        </Canvas>
+      )}
       <ScrollView
+        ref={ref}
         style={[
           styles.container,
           { height: height },
