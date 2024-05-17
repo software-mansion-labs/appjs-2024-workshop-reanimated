@@ -12,10 +12,8 @@ import {
   Appearance,
   Dimensions,
   Platform,
-  Pressable,
   ScrollView,
   StyleSheet,
-  Text,
   View,
   useColorScheme,
 } from "react-native";
@@ -27,6 +25,7 @@ import {
 } from "react-native-reanimated";
 
 import { Cards } from "@/components/Cards";
+import { Header } from "@/components/Header";
 import { SearchBar } from "@/components/SearchBar";
 import { Trending } from "@/components/Trending";
 
@@ -176,39 +175,16 @@ export function SkiaThemeCurtain() {
         <View
           style={[
             { width: width },
+            styles.padding,
             colorScheme === "light"
               ? { backgroundColor: "white" }
               : { backgroundColor: "#020617" },
           ]}
         >
-          <View style={styles.padding}>
-            <View style={styles.row}>
-              <Text
-                style={[
-                  styles.header,
-                  colorScheme === "light"
-                    ? { color: "#0f172a" }
-                    : { color: "#f1f5f9" },
-                ]}
-              >
-                Home
-              </Text>
-              <Pressable style={styles.themeSwitcher} onPress={changeTheme}>
-                <Text
-                  style={
-                    colorScheme === "light"
-                      ? { color: "#0f172a" }
-                      : { color: "#f1f5f9" }
-                  }
-                >
-                  Switch theme
-                </Text>
-              </Pressable>
-            </View>
-            <SearchBar />
-            <Trending />
-            <Cards />
-          </View>
+          <Header changeTheme={changeTheme} />
+          <SearchBar />
+          <Trending />
+          <Cards />
         </View>
       </ScrollView>
       <StatusBar translucent />
@@ -232,19 +208,5 @@ const styles = StyleSheet.create({
     width: width,
     zIndex: 1,
     elevation: 1,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  themeSwitcher: {
-    paddingBottom: 10,
-    paddingRight: 4,
-  },
-  header: {
-    fontSize: 36,
-    fontWeight: "bold",
-    marginBottom: 16,
   },
 });
