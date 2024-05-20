@@ -73,8 +73,8 @@ export function EmojiStaggerLesson({ message }: Props) {
                 <Animated.Text
                   style={styles.emoji}
                   key={emoji}
-                  entering={ZoomIn.springify()
-                    .delay(33 * i + 100)
+                  entering={ZoomIn.delay(33 * i + 100)
+                    .springify()
                     .stiffness(200)
                     .damping(10)}>
                   {emoji}
