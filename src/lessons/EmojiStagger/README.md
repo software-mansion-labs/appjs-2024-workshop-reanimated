@@ -5,7 +5,7 @@ In this lesson we'll build an emoji popup animation. This pattern is commonly us
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/39658211/f98f1dd7-6ffc-40e7-b0a0-b7b8a51e00ea
 
 
-## Step 1 – Shrinking message on long press
+## Step 1 – Shrinking a message on long press
 
 
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/39658211/7d0ae5e0-0b2d-4d9b-9184-15604953ffa9
@@ -14,14 +14,14 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 <details>
 <summary>
-  <b>[1]</b> Replace a `Pressable` logic with a mix of `Gesture.LongPress()` and `Animated.View`
+  <b>[1]</b> Replace a <code>Pressable</code> logic with a mix of <code>Gesture.LongPress()</code> and <code>Animated.View</code>
 </summary>
 
 <br/>
 
 <details>
 <summary>
-  Change the `Pressable` to an `Animated.View` wrapped with a `GestureDetector`
+  Change the <code>Pressable</code> to an <code>Animated.View</code> wrapped with a <code>GestureDetector</code>
 </summary>
 
 ```jsx
@@ -42,7 +42,7 @@ import { GestureDetector } from 'react-native-gesture-handler';
 
 <details>
 <summary>
-  Reimplement `onPress` logic as an `Gesture.LongPress()`. Pass the defined gesture to the GestureDetector.
+  Reimplement <code>onPress</code> logic as an <code>Gesture.LongPress()</code>. Pass the defined gesture to the <code>GestureDetector</code>.
 </summary>
 
 Don't forget to use `runOnJS` when changing React state inside a gesture callback.
@@ -67,13 +67,13 @@ const longPress = Gesture.LongPress()
 <br/>
 <details>
 <summary>
-  <b>[2]</b> Implement shrinking animation using `useAnimatedStyle` hook and `Gesture.LongPress`
+  <b>[2]</b> Implement shrinking animation using <code>useAnimatedStyle</code> hook and <code>Gesture.LongPress</code>
 </summary>
 
 <br/>
 
 <details>
-<summary>Define a `pressed` shared value initialized with `false`</summary>
+<summary>Define a <code>pressed</code> shared value initialized with <code>false</code></summary>
 
 Shared value is a current state of an animation.
 
@@ -86,7 +86,7 @@ const pressed = useSharedValue(false);
 
 <details>
 <summary>
-Set the `pressed` shared value to `true` when gesture begins and `false` when it finalizes
+Set the <code>pressed</code> shared value to <code>true</code> when gesture begins and <code>false</code> when it finalizes
 </summary>
 
 ```jsx
@@ -103,7 +103,7 @@ const longPress = Gesture.LongPress()
 
 <details>
 <summary>
-Animate the element's scale using `useAnimatedStyle` and `withTiming` modifier. Don't forget to pass the defined styles to an `Animated.View`
+Animate the element's scale using <code>useAnimatedStyle</code> and <code>withTiming</code> modifier. Don't forget to pass the defined styles to an <code>Animated.View</code>
 </summary>
 
 ```jsx
@@ -131,7 +131,7 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 <details>
 <summary>
-  <b>[1]</b> Replace `emojiPopupWrapper`, `emojiPopup` and `emoji` elements with Animated components
+  <b>[1]</b> Replace <code>emojiPopupWrapper</code>, <code>emojiPopup</code> and <code>emoji</code> elements with Animated components
 </summary>
 
 ```jsx
@@ -150,7 +150,7 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 <details>
 <summary>
-  <b>[2]</b> Add `FadeInDown`, `FadeInRight`, `ZoomIn` entering animations
+  <b>[2]</b> Add <code>FadeInDown</code>, <code>FadeInRight</code>, <code>ZoomIn</code> entering animations
 </summary>
 
 ```jsx
@@ -175,7 +175,7 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 <details>
 <summary>
-<b>[3]</b> Add `FadeOutDown` exiting animation to the `emojiPopupWrapper`
+<b>[3]</b> Add <code>FadeOutDown</code> exiting animation to the <code>emojiPopupWrapper</code>
 
 
 </summary>
@@ -200,7 +200,7 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 <details>
 <summary>
-<b>[1]</b> Customize the length of entering animation using `.duration()` modifier
+<b>[1]</b> Customize the length of entering animation using <code>.duration()</code> modifier
 </summary>
 
 ```jsx
@@ -222,7 +222,7 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 <details>
 <summary>
-Multiply the array `index` times the delay inside `.delay()` modifier on the `ZoomIn` animation
+Multiply the array <code>index</code> times the delay inside <code>.delay()</code> modifier on the <code>ZoomIn</code> animation
 </summary>
 
 ```jsx
@@ -233,7 +233,7 @@ Multiply the array `index` times the delay inside `.delay()` modifier on the `Zo
 
 <details>
 <summary>
-Use `.springify()` modifier to emphasize the effect 
+Use <code>.springify()</code> modifier to emphasize the effect 
 </summary>
 
 ```jsx
