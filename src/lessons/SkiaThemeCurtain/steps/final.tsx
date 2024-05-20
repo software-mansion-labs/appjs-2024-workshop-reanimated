@@ -75,20 +75,16 @@ vec4 transition (vec2 uv) {
 export function SkiaThemeCurtain() {
   const progress = useSharedValue(0);
   const colorScheme = useColorScheme();
-  const [isThemeSwitching, setThemeSwitching] = useState(false);
 
   const ref = useRef<ScrollView>(null);
   const [firstSnapshot, setFirstSnapshot] = useState<SkImage | null>(null);
   const [secondSnapshot, setSecondSnapshot] = useState<SkImage | null>(null);
 
   const changeTheme = async () => {
-    if (isThemeSwitching) return;
-
     progress.value = 0;
     const snapshot = await makeImageFromView(ref);
     setFirstSnapshot(snapshot);
     Appearance.setColorScheme(colorScheme === "light" ? "dark" : "light");
-    setThemeSwitching(true);
   };
 
   useEffect(() => {
@@ -102,7 +98,6 @@ export function SkiaThemeCurtain() {
           () => {
             runOnJS(setFirstSnapshot)(null);
             runOnJS(setSecondSnapshot)(null);
-            runOnJS(setThemeSwitching)(false);
           },
         );
       }, 30);

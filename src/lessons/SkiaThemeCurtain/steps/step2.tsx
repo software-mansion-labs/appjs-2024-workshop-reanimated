@@ -14,7 +14,6 @@ import {
   View,
   useColorScheme,
 } from "react-native";
-import { runOnJS, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { Cards } from "@/components/Cards";
 import { Header } from "@/components/Header";
@@ -65,7 +64,6 @@ vec4 transition (vec2 uv) {
 `;
 
 export function SkiaThemeCurtain() {
-  const progress = useSharedValue(0);
   const colorScheme = useColorScheme();
 
   const ref = useRef<ScrollView>(null);
@@ -73,7 +71,6 @@ export function SkiaThemeCurtain() {
   const [secondSnapshot, setSecondSnapshot] = useState<SkImage | null>(null);
 
   const changeTheme = async () => {
-    progress.value = 0;
     const snapshot = await makeImageFromView(ref);
     setFirstSnapshot(snapshot);
     Appearance.setColorScheme(colorScheme === "light" ? "dark" : "light");
@@ -84,14 +81,6 @@ export function SkiaThemeCurtain() {
       setTimeout(async () => {
         const snapshot = await makeImageFromView(ref);
         setSecondSnapshot(snapshot);
-        progress.value = withTiming(
-          1,
-          { duration: TRANSITION_DURATION },
-          () => {
-            runOnJS(setFirstSnapshot)(null);
-            runOnJS(setSecondSnapshot)(null);
-          },
-        );
       }, 30);
     });
 
