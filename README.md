@@ -9,7 +9,7 @@
 
 During this workshop we will work with an [Expo Go](https://expo.dev/go) app. Expo Go is a React Native sandbox with all the native dependencies we need for this workshop, integrated into a handy app.
 
-You can download Expo Go to your [Android phone from the Google Play store](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www) or [iOS phone from the App Store](https://apps.apple.com/us/app/expo-go/id982107779). 
+You can download Expo Go to your Android phone [from the Google Play store](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www) or iOS phone [from the App Store](https://apps.apple.com/us/app/expo-go/id982107779). 
 
 You can use an iOS simulator, Android emulator, or any modern Android or iOS phone to perform the exercises, however, we recommend that you stick to one choice to avoid additional setup steps you may need to do in the future.
 
