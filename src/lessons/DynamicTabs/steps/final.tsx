@@ -28,7 +28,6 @@ const Tab = memo(({ onActive, name, isActiveTabIndex }: TabsProps) => {
   const tabRef = useAnimatedRef<View>();
   const sendMeasurements = () => {
     runOnUI(() => {
-      "worklet";
       const measurements = measure(tabRef);
       runOnJS(onActive)(measurements);
     })();
@@ -98,8 +97,6 @@ export function DynamicTabsLesson({
 
   const scrollToTab = (index: number) => {
     runOnUI(() => {
-      "worklet";
-
       const scrollViewDimensions: MeasuredDimensions = measure(scrollViewRef);
 
       if (!scrollViewDimensions || !tabMeasurements.value) {

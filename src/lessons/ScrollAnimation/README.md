@@ -104,8 +104,6 @@ activeScrollIndex.value = snapToIndex;
 ```jsx
 const snapIndicatorTo = (index: number) => {
   runOnUI(() => {
-    "worklet";
-
     if (scrollableIndex.value === index || isInteracting.value) {
       return;
     }
