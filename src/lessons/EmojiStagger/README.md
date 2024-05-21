@@ -5,7 +5,7 @@ In this lesson we'll build an emoji popup animation. This pattern is commonly us
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/39658211/f98f1dd7-6ffc-40e7-b0a0-b7b8a51e00ea
 
 
-## Step 1 – Shrinking a message on long press
+## Step 1 – Shrink a message on long press
 
 
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/39658211/7d0ae5e0-0b2d-4d9b-9184-15604953ffa9
@@ -124,7 +124,7 @@ const animatedStyles = useAnimatedStyle(() => ({
 <br/>
 </details>
 
-## Step 2 – Using Layout Animations
+## Step 2 – Show emojis using layout animations
 
 
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/39658211/e0e081fb-15c1-4d6d-9e72-80edff36ed9f
@@ -191,7 +191,7 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 
 
-## Step 3 – Customize the Layout Animations
+## Step 3 – Customize the layout Animations
 
 
 
