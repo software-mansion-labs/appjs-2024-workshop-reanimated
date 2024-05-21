@@ -318,21 +318,8 @@ export function Item({ item, index, scrollX }: ItemProps) {
 ```
 
 </details>
-
-_Placeholder_
-
-</details>
-<br/>
-<details>
-<summary>
-  <b>[2]</b> Toggle me
-</summary>
-
-_Placeholder_
-
-</details>
 <br/>
 
-## Bonus??
+## Bonus
 
 This step will extend the `Animated.FlatList` component and it will allow to scroll to an index
