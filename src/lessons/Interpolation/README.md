@@ -1,12 +1,13 @@
 # Interpolations
 
-_Placeholder_
+https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/2d4ab5c7-3e0e-4657-8d23-4a1708ae11ca
+
 
 ## Step 1 – all the things but scroll
 
 In this lesson we are going to change listen to `onScroll` events on a FlatList.
 
-_Placeholder video_
+https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/eb480717-8743-4229-8625-3380728e803b
 
 <details>
 <summary>
@@ -114,8 +115,9 @@ type ItemProps = ListRenderItemInfo<ItemType> & {
 
 ## Step 2 – Reanimated component
 
-<details>
+https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/d911f14f-5283-49ce-a841-92b4a988eaeb
 
+<details>
 <summary>
   <b>[1]</b> Let's modify the scrollX to move by index, instead of the actual scroll offset.
   In this way we are going to get the current active index from the slide / carousel.
@@ -187,6 +189,8 @@ outside of it, you can `Extrapolation.CLAMP` the interpolation and this will sti
 making v1 = v0 so, in other words,
 
 `v0 + t * (v1 - v0) = v0 + t * (v0 - v0) = v0 + 0 = v0`
+
+https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/c71cad48-4ebf-41a4-8fdb-3ba7ab8a1541
 
 <details>
 
@@ -279,6 +283,8 @@ export function Item({ item, index, scrollX }: ItemProps) {
 
 ## Step 4 – More items
 
+https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/81e02e06-b34b-4fee-b6fa-c9e775b5f09a
+
 To make this step more interactive, you can open `lib/theme` and change the `maxVisibleItems` to any number above 3, let's say 5.
 
 <details>
@@ -320,6 +326,32 @@ export function Item({ item, index, scrollX }: ItemProps) {
 </details>
 <br/>
 
+<details>
+
+<summary>
+  <b>[bonus]</b> add support for `initialScrollIndex` to the `Animated.FlatList`
+</summary>
+
+```jsx
+import Animated from "react-native-reanimated";
+
+<Animated.FlatList
+  initialScrollIndex={1}
+  getItemLayout={(_, index) => ({
+    length: layout.itemSize + layout.spacing,
+    offset: (layout.itemSize + layout.spacing) * index,
+    index,
+  })}
+```
+
+</details>
+<br/>
+
 ## Bonus
 
-This step will extend the `Animated.FlatList` component and it will allow to scroll to an index
+https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/f3ad201f-9115-4f4f-aaed-16a57b87d6c7
+
+
+Here's the step where you'll test your creativity. In this bonus point you need to use the `useAnimatedSensor` with `SensorType.ROTATION` to apply to the active item from the list a movement based on the phone rotation `roll` and `pitch`. 
+
+
