@@ -370,7 +370,7 @@ const balloonStyle = useAnimatedStyle(() => {
 
 </details><br/>
 
-## Step 6 – Custom animations (gravity with sensors)
+## Step 6 – Custom animations (gravity with sensors) (bonus)
 
 In the final step we will explore Reanimated's sensors and custom animations API.
 
