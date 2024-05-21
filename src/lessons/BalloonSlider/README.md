@@ -412,7 +412,7 @@ function withGravity(userConfig) {
 When an animation is ongoing, `onFrame` callback will execute on every frame.
 It is expected for the `onFrame` callback to update `animated.current` field with the current position of the animated value, and to return `true` when the animation completes.
 
-Finally to get all the things hooked together, we will use [`useAnimatedReaction`](https://docs.swmansion.com/react-native-reanimated/docs/api/hooks/useAnimatedReaction/) hook, which helps in executing side-effect upon shared value updates.
+Finally to get all the things hooked together, we will use [`useAnimatedReaction`](https://docs.swmansion.com/react-native-reanimated/docs/advanced/useAnimatedReaction/) hook, which helps in executing side-effect upon shared value updates.
 We will use this hook to process updates to the sensor and start gravity animation for the knob position.
 This hook takes two arguments: one is the "prepare" worklet and the other is "reaction" worklet.
 In our case we will use "prepare" phase to calculate the acceleration based on the device rotation, then use that gravity in the "reaction" phase to run the animation.
