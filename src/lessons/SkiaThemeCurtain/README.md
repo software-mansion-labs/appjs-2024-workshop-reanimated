@@ -142,7 +142,7 @@ function App() {
 
 <details>
 <summary>
-<b>[2]</b> Show second snapshot when both of the snapshots are ready
+<b>[2]</b> Show second snapshot when both snapshots are ready (not null)
 </summary>
 
 ```jsx
@@ -168,19 +168,189 @@ function App() {
     );
   }
 
-  // ...
+  return (
+    // ...
+  )
 }
 ```
 
 </details>
 
 
-
 ## Step 3 – Animate the snapshots using GLSL/Skia Shaders
 
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/39658211/79ad34f6-806f-44a9-b978-2269b4f3a852
 
+<details>
+<summary>
+  <b>[1]</b> Keep track of the transition progress using a shared value
+</summary>
 
+<br/>
+<details>
+<summary>
+Define a <code>progress</code> shared value initialized with <code>0</code>
+</summary>
+
+```jsx
+import { useSharedValue } from 'react-native-reanimated';
+
+function App() {
+  const progress = useSharedValue(0)
+  // ...
+}
+```
+</details>
+
+<details>
+<summary>Update the progress shared value after the second snapshot. Use <code>withTiming</code> animation. Set timing duration to <code>TRANSITION_DURATION</code> </summary>
+
+```jsx
+  const listener = Appearance.addChangeListener(() => {
+    setTimeout(async () => {
+      // ...
+      progress.value = withTiming(
+        1,
+        { duration: TRANSITION_DURATION }
+      );
+      // ...
+```
+
+</details>
+
+
+<details>
+<summary>
+Clean up the stored snapshots on animation finish. Hint: use 3rd argument of <code>withTiming</code> and calls to <code>runOnJS</code>.
+</summary>
+
+
+```jsx
+  progress.value = withTiming(
+    1,
+    { duration: TRANSITION_DURATION },
+    () => {
+      runOnJS(setFirstSnapshot)(null);
+      runOnJS(setSecondSnapshot)(null);
+    },
+  );
+```
+
+</details>
+
+<details>
+<summary>
+(Optional) Debug the progress shared value using the <code>useDerivedValue</code> hook
+</summary>
+Using <code>useDerivedValue</code> reacts to the changes of a shared value allowing printing the current value to the console.
+
+```jsx
+useDerivedValue(() => {
+  console.log(progress.value);
+})
+```
+
+</details>
+
+</details>
+
+<details>
+<summary>
+<b>[2]</b> Use Skia Shaders to animate the transition
+</summary>
+
+<br/>
+
+<details>
+<summary>
+Use <code>ImageShader</code> components wrapped a <code>Shader</code> when transitioning
+</summary>
+
+```jsx
+import { Canvas, Fill, ImageShader, Shader } from "@shopify/react-native-skia";
+
+function App () {
+  // ...
+  if (isTransitioning) {
+    return (
+      <View style={styles.fill}>
+        <Canvas style={{ height: height }}>
+          <Fill>
+            <Shader>
+              <ImageShader
+                image={firstSnapshot}
+                fit="cover"
+                width={width}
+                height={height}
+              />
+              <ImageShader
+                image={secondSnapshot}
+                fit="cover"
+                width={width}
+                height={height}
+              />
+            </Shader>
+          </Fill>
+        </Canvas>
+        <StatusBar translucent />
+      </View>
+    );
+  }
+
+  return (
+    // ...
+  )
+}
+
+```
+
+</details>
+
+<details>
+<summary>Define <code>progress</code> and <code>resolution</code> shader uniforms based on the <code>progress</code> shared value using <code>useDerivedValue</code> and pass it to the <code>Shader</code>.</summary>
+
+<br/>
+
+Uniforms control the shader behavior.
+
+```jsx
+import { useDerivedValue } from 'react-native-reanimated';
+
+function App() {
+  // ...
+  const uniforms = useDerivedValue(() => {
+    return {
+      progress: progress.value,
+      resolution: [width, height], // from Dimensions.get("window")
+    };
+  });
+  // ...
+
+  <Shader uniforms={uniforms}>
+}
+```
+
+</details>
+
+
+<details>
+<summary>
+Based on the <code>colorScheme</code> pass conditionally the <code>warpUp</code> and <code>warpDown</code> glsl transtions as the <code>source</code> prop to the <code>Shader</code> component. You'll need to wrap the transitions with the <code>transition</code> function imported from <code>"@/lib/shader"</code>.
+</summary>
+
+```jsx
+<Shader
+  source={transition(colorScheme === "light" ? warpUp : warpDown)}
+  uniforms={uniforms}
+>
+```
+</details>
+
+</details>
+
+<br/>
+
+You can source GLSL transtions from a great resource called [Gl-Transitons](https://gl-transitions.com/gallery). 
 
 ## Next step
 
