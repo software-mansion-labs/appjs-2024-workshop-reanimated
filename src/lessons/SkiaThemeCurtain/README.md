@@ -263,7 +263,7 @@ useDerivedValue(() => {
 
 <details>
 <summary>
-Use <code>ImageShader</code> components wrapped a <code>Shader</code> when transitioning
+Use <code>ImageShader</code> components wrapped a <code>Shader</code> when transitioning. <code>Shader</code> also needs to be wrapped with a <code>Fill</code> component.
 </summary>
 
 ```jsx
