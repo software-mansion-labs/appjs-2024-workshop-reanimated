@@ -4,7 +4,11 @@ import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 export function DynamicTabsSlide({ item }: { item: (typeof tabsList)[0] }) {
   const { width } = useWindowDimensions();
   return (
-    <View style={{ width, padding: layout.spacing * 2 }}>
+    <View
+      style={{
+        width: width,
+        padding: layout.spacing,
+      }}>
       <View style={styles.item}>
         <Text style={styles.text}>{item}</Text>
       </View>

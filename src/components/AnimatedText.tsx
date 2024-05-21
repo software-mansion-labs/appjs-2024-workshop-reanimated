@@ -19,7 +19,7 @@ const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 export function AnimatedText({
   style,
   text,
-  label,
+  label = "",
 }: {
   style?: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
   label?: string;

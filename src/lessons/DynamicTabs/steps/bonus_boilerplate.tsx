@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
 
 export function DynamicTabsLesson() {
   return (
-    <Container>
+    <Container style={{ padding: 0 }}>
       <DynamicTabs
         selectedTabIndex={0}
         onChangeTab={(tabIndex) => {

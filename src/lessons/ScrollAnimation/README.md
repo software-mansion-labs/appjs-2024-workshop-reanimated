@@ -171,7 +171,7 @@ const styles = useAnimatedStyle(() => {
       scrollableIndex.value,
       [index - 1, index, index + 1],
       [0.5, 1, 0.5],
-      Extrapolate.CLAMP,
+      Extrapolation.CLAMP,
     ),
     transform: [
       {
@@ -179,7 +179,7 @@ const styles = useAnimatedStyle(() => {
           scrollableIndex.value,
           [index - 2, index, index + 2],
           [1, 1.5, 1],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       },
     ],

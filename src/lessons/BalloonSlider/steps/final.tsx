@@ -5,7 +5,7 @@ import { colorShades, layout } from "@/lib/theme";
 import { StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   SensorType,
   defineAnimation,
   interpolate,
@@ -128,7 +128,7 @@ export function BalloonSliderLesson() {
         knobScale.value,
         [0, 1],
         [layout.knobSize / 2, 2],
-        Extrapolate.CLAMP
+        Extrapolation.CLAMP
       ),
       transform: [
         {

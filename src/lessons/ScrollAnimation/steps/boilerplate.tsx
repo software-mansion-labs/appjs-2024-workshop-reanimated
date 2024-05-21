@@ -8,7 +8,7 @@ import { useMemo } from "react";
 import { SectionList, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
@@ -84,7 +84,7 @@ export function ScrollAnimationLesson() {
         knobScale.value,
         [0, 1],
         [layout.knobSize / 2, 2],
-        Extrapolate.CLAMP
+        Extrapolation.CLAMP
       ),
       transform: [
         {

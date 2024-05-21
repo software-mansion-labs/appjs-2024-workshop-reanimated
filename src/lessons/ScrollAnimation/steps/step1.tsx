@@ -8,7 +8,7 @@ import { useMemo } from "react";
 import { SectionList, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   SharedValue,
   interpolate,
   measure,
@@ -41,7 +41,7 @@ const AlphabetLetter = ({
         scrollableIndex.value,
         [index - 1, index, index + 1],
         [0.5, 1, 0.5],
-        Extrapolate.CLAMP
+        Extrapolation.CLAMP
       ),
       transform: [
         {
@@ -49,7 +49,7 @@ const AlphabetLetter = ({
             scrollableIndex.value,
             [index - 2, index, index + 2],
             [1, 1.5, 1],
-            Extrapolate.CLAMP
+            Extrapolation.CLAMP
           ),
         },
       ],
@@ -163,7 +163,7 @@ export function ScrollAnimationLesson() {
         knobScale.value,
         [0, 1],
         [layout.knobSize / 2, 2],
-        Extrapolate.CLAMP
+        Extrapolation.CLAMP
       ),
       transform: [
         {

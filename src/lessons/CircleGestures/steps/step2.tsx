@@ -4,7 +4,7 @@ import { colorShades, layout } from "@/lib/theme";
 import { StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
@@ -40,7 +40,7 @@ export function CircleGesturesLesson() {
         scale.value,
         [1, 2],
         [layout.knobSize / 2, 2],
-        Extrapolate.CLAMP
+        Extrapolation.CLAMP
       ),
       transform: [
         {

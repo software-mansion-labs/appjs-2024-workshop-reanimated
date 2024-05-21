@@ -167,7 +167,7 @@ export function DynamicTabsLesson() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(2);
   const ref = useRef<FlatList>(null);
   return (
-    <Container>
+    <Container style={{ padding: 0 }}>
       <DynamicTabs
         selectedTabIndex={selectedTabIndex}
         onChangeTab={(index) => {

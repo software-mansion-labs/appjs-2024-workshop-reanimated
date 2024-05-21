@@ -33,7 +33,7 @@ create a `scale` sharedValue starting from 1
 </summary>
 
 ```jsx
-const scale = useSharedValue(1)
+const scale = useSharedValue(1);
 ```
 
 </details>
@@ -76,15 +76,15 @@ const animatedStyle = useAnimatedStyle(() => {
       scale.value,
       [1, 2],
       [layout.knobSize / 2, 2],
-      Extrapolate.CLAMP,
+      Extrapolation.CLAMP
     ),
     transform: [
       {
         scale: scale.value,
       },
     ],
-  }
-})
+  };
+});
 ```
 
 </details>
@@ -115,7 +115,7 @@ Create a Pan gesture, combine it with Tap gesture. Using Pan gesture, we can get
 </summary>
 
 ```jsx
-const panGesture = Gesture.Pan()
+const panGesture = Gesture.Pan();
 ```
 
 </details>
@@ -132,7 +132,7 @@ create a `x` sharedValue starting from 1
 </summary>
 
 ```jsx
-const x = useSharedValue(0)
+const x = useSharedValue(0);
 ```
 
 </details>
@@ -228,10 +228,10 @@ remove `tapGesture` and use just the `panGesture` as gesture on `GestureDetector
   </summary>
 
 ```jsx
-const isInteracting = useSharedValue(false)
+const isInteracting = useSharedValue(false);
 const scale = useDerivedValue(() => {
-  return withSpring(isInteracting.value ? 2 : 1)
-})
+  return withSpring(isInteracting.value ? 2 : 1);
+});
 ```
 
   </details>
