@@ -3,13 +3,7 @@ import { Container } from "@/components/Container";
 import { items } from "@/lib/mock";
 import { colors, layout } from "@/lib/theme";
 import React from "react";
-import {
-  FlatList,
-  FlatListProps,
-  ListRenderItemInfo,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { ListRenderItemInfo, StyleSheet, Text } from "react-native";
 import Animated, {
   SharedValue,
   interpolate,
@@ -20,18 +14,15 @@ import Animated, {
 } from "react-native-reanimated";
 
 type ItemType = (typeof items)[0];
-const AnimatedFlatList =
-  Animated.createAnimatedComponent<FlatListProps<ItemType>>(FlatList);
 
 export function Interpolation() {
   const scrollX = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler((e) => {
-    scrollX.value =
-      Math.round(e.contentOffset.x) / (layout.itemSize + layout.spacing);
+    scrollX.value = e.contentOffset.x / (layout.itemSize + layout.spacing);
   });
   return (
     <Container style={styles.container}>
-      <AnimatedFlatList
+      <Animated.FlatList
         data={items}
         horizontal
         contentContainerStyle={{
@@ -68,7 +59,7 @@ export function Item({ item, index, scrollX }: ItemProps) {
             // targeting more on when the items moves more by index on the left
             // [index - 1, index, index + 1, index + 2],
             // targeting more on when the items moves more by index on the right
-            // [index + 2, index - 1, index, index + 1],
+            // [index - 2, index - 1, index, index + 1],
             [0.9, 1, 0.9]
             // For this example, the next index+-2 will be 0.9-1 = -0.1 smaller than the current index
             // Clamp to 1 on left
@@ -85,7 +76,7 @@ export function Item({ item, index, scrollX }: ItemProps) {
   return (
     <Animated.View style={[styles.item, stylez]}>
       <Text>{item.label}</Text>
-      <AnimatedText text={scrollX} />
+      <AnimatedText text={scrollX} label='offset: ' />
     </Animated.View>
   );
 }

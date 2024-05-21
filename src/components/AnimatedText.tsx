@@ -19,19 +19,23 @@ const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 export function AnimatedText({
   style,
   text,
+  label,
 }: {
   style?: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
+  label?: string;
   text: SharedValue<number>;
 }): React.ReactElement {
   const animatedProps = useAnimatedProps(() => {
-    return { text: String(text.value.toFixed(1)) } as unknown as TextInputProps;
+    return {
+      text: `${label}${text.value.toFixed(1)}`,
+    } as unknown as TextInputProps;
   });
 
   return (
     <AnimatedTextInput
       underlineColorAndroid='transparent'
       editable={false}
-      value={String(text.value.toFixed(1))}
+      value={`${label}${text.value.toFixed(1)}`}
       style={[styles.text, style]}
       animatedProps={animatedProps}
     />

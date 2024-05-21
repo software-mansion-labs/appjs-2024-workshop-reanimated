@@ -3,14 +3,7 @@ import { Container } from "@/components/Container";
 import { items } from "@/lib/mock";
 import { colors, layout } from "@/lib/theme";
 import React from "react";
-import {
-  FlatList,
-  FlatListProps,
-  ListRenderItemInfo,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ListRenderItemInfo, StyleSheet, Text, View } from "react-native";
 import Animated, {
   SharedValue,
   useAnimatedScrollHandler,
@@ -18,8 +11,6 @@ import Animated, {
 } from "react-native-reanimated";
 
 type ItemType = (typeof items)[0];
-const AnimatedFlatList =
-  Animated.createAnimatedComponent<FlatListProps<ItemType>>(FlatList);
 
 export function Interpolation() {
   const scrollX = useSharedValue(0);
@@ -28,7 +19,7 @@ export function Interpolation() {
   });
   return (
     <Container style={styles.container}>
-      <AnimatedFlatList
+      <Animated.FlatList
         data={items}
         horizontal
         contentContainerStyle={{
@@ -52,7 +43,7 @@ export function Item({ item, index, scrollX }: ItemProps) {
   return (
     <View style={styles.item}>
       <Text>{item.label}</Text>
-      <AnimatedText text={scrollX} />
+      <AnimatedText text={scrollX} label='offset: ' />
     </View>
   );
 }
