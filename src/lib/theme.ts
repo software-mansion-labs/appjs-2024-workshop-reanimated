@@ -2,7 +2,7 @@ import { Dimensions } from "react-native";
 
 const { width } = Dimensions.get("screen");
 
-const numberOfItems = 2; // this is 0.5 - 1 - 0.5 combo
+const maxVisibleItems = 2; // this is 0.5 - 1 - 0.5 combo
 
 export const layout = {
   spacing: 8,
@@ -14,8 +14,7 @@ export const layout = {
   contactListItemHeight: 36 + 8 * 2, // layout.avatarSize + layout.spacing * 2
   contactListSectionHeaderHeight: 50,
   // Interpolation
-  // itemSize: moreItems ? width * 0.25 : width * 0.75,
-  itemSize: width / numberOfItems,
+  itemSize: width / maxVisibleItems,
   screenWidth: width,
 };
 
