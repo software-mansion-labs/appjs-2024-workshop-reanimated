@@ -191,7 +191,7 @@ https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/3
 
 
 
-## Step 3 – Customize the layout Animations
+## Step 3 – The stagger effect
 
 
 
