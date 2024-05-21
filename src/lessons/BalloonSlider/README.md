@@ -382,7 +382,7 @@ This effect can be implemented in various different ways, but for the sake of th
 
 In order to define a custom animation, we will use `defineAnimation` API from Reanimated.
 This API takes an animation factory worklet that instantiates an animation object for a given animation configuration.
-The animation object consists of two main methods: `oStart` and `onFrame`.
+The animation object consists of two main methods: `onStart` and `onFrame`.
 Below we present a template for defining the custom gravity animation:
 
 ```ts
@@ -418,7 +418,7 @@ This hook takes two arguments: one is the "prepare" worklet and the other is "re
 In our case we will use "prepare" phase to calculate the acceleration based on the device rotation, then use that gravity in the "reaction" phase to run the animation.
 
 ```js
-seAnimatedReaction(
+useAnimatedReaction(
   () => {
     return calculateAccelerationBasedOnRotation(sensor.value.x);
   },
