@@ -5,6 +5,8 @@ import { colors, layout } from "@/lib/theme";
 import React from "react";
 import {
   CellRendererProps,
+  FlatList,
+  FlatListProps,
   ListRenderItemInfo,
   StyleSheet,
   Text,
@@ -12,34 +14,29 @@ import {
 import Animated, {
   AnimatedSensor,
   Extrapolation,
-  SensorType,
   SharedValue,
   ValueRotation,
-  clamp,
   interpolate,
   interpolateColor,
   useAnimatedScrollHandler,
-  useAnimatedSensor,
   useAnimatedStyle,
-  useDerivedValue,
   useSharedValue,
-  withSpring,
 } from "react-native-reanimated";
 
 type ItemType = (typeof items)[0];
+const AnimatedFlatList =
+  Animated.createAnimatedComponent<FlatListProps<ItemType>>(FlatList);
 
 export function Interpolation() {
   const scrollX = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler((e) => {
     scrollX.value = e.contentOffset.x / (layout.itemSize + layout.spacing);
   });
-  const sensor = useAnimatedSensor(SensorType.ROTATION, {
-    interval: 20,
-  });
+  const sensor = null;
   return (
     <Container style={styles.container}>
       <Text>Requires running on real device.</Text>
-      <Animated.FlatList
+      <AnimatedFlatList
         data={items}
         horizontal
         CellRendererComponent={(props) => (
@@ -103,24 +100,6 @@ export function CellRenderer({
   sensor,
   ...rest
 }: CellRendererItemProps) {
-  const rotateX = useDerivedValue(() => {
-    const { roll } = sensor.sensor.value;
-    const angle = clamp(roll, -Math.PI / 6, Math.PI / 6);
-    return withSpring(-angle, { damping: 300 });
-  });
-  const rotateY = useDerivedValue(() => {
-    const { pitch } = sensor.sensor.value;
-    // Compensate the "default" angle that a user might hold the phone at :)
-    // 40 degrees to radians
-    const angle = clamp(pitch, -Math.PI / 4, Math.PI) - 40 * (Math.PI / 180);
-    return withSpring(-angle, { damping: 300 });
-  });
-  const translateX = useDerivedValue(() => {
-    return withSpring(-rotateX.value * 100, { damping: 300 });
-  });
-  const translateY = useDerivedValue(() => {
-    return withSpring(rotateY.value * 100, { damping: 300 });
-  });
   const stylez = useAnimatedStyle(() => {
     return {
       zIndex: interpolate(
@@ -131,38 +110,6 @@ export function CellRenderer({
       transform: [
         {
           perspective: layout.itemSize * 4,
-        },
-        {
-          rotateY: `${interpolate(
-            scrollX.value,
-            [index - 1, index, index + 1],
-            [0, rotateX.value, 0],
-            Extrapolation.CLAMP
-          )}rad`,
-        },
-        {
-          rotateX: `${interpolate(
-            scrollX.value,
-            [index - 1, index, index + 1],
-            [0, rotateY.value, 0],
-            Extrapolation.CLAMP
-          )}rad`,
-        },
-        {
-          translateY: interpolate(
-            scrollX.value,
-            [index - 1, index, index + 1],
-            [0, translateY.value, 0],
-            Extrapolation.CLAMP
-          ),
-        },
-        {
-          translateX: interpolate(
-            scrollX.value,
-            [index - 1, index, index + 1],
-            [0, translateX.value, 0],
-            Extrapolation.CLAMP
-          ),
         },
         {
           rotateZ: `${interpolate(

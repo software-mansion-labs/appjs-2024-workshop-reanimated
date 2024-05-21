@@ -2,8 +2,7 @@
 
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/2d4ab5c7-3e0e-4657-8d23-4a1708ae11ca
 
-
-## Step 1 – all the things but scroll
+## Step 1 – Scroll events
 
 In this lesson we are going to change listen to `onScroll` events on a FlatList.
 
@@ -163,7 +162,7 @@ import { Animated } from "react-native-reanimated";
 
 </details>
 
-## Step 3 – Animate each `renderItem`
+## Step 3 – Animate `renderItem` with interpolate
 
 Now that we have access to the scrollX value inside the `renderItem` (for each slide item), we can start applying animations using the `interpolate`.
 
@@ -281,7 +280,7 @@ export function Item({ item, index, scrollX }: ItemProps) {
 
 <br/>
 
-## Step 4 – More items
+## Step 4 – Manual clamp of animation
 
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/81e02e06-b34b-4fee-b6fa-c9e775b5f09a
 
@@ -347,11 +346,141 @@ import Animated from "react-native-reanimated";
 </details>
 <br/>
 
-## Bonus
+## [Bonus] Sensors and parallax effect
 
 https://github.com/software-mansion-labs/appjs-2024-workshop-reanimated/assets/2805320/f3ad201f-9115-4f4f-aaed-16a57b87d6c7
 
+Here's the step where you'll test your creativity. In this bonus point you need to use the `useAnimatedSensor` with `SensorType.ROTATION` to apply to the active item from the list a movement based on the phone rotation `roll` and `pitch`.
 
-Here's the step where you'll test your creativity. In this bonus point you need to use the `useAnimatedSensor` with `SensorType.ROTATION` to apply to the active item from the list a movement based on the phone rotation `roll` and `pitch`. 
+We are going to extend the `FlatList` CellRendererComponent, in this way, we can change the zIndex for every item and leave the `renderItem` as clean as possible and the rotation is going to happen on the parent level.
 
+<details>
 
+<summary>
+  <b>[1]</b> copy `/steps/bonus_boilerplate.tsx` to `Interpolation.tsx`
+</summary>
+</details>
+<br/>
+<details>
+
+<summary>
+  <b>[2]</b> get the `ROTATION` sensor from `useAnimatedSensor` from `react-native-reanimated` and assign it to the `sensor` constant.
+</summary>
+
+```jsx
+import { useAnimatedSensor, SensorType } from "react-native-reanimated";
+
+const sensor = useAnimatedSensor(SensorType.ROTATION, {
+  interval: 20,
+});
+```
+
+</details>
+<br/>
+<details>
+
+<summary>
+  <b>[3]</b> Now, `CellRenderItem` will receive the sensor and we can start animating the `View`. We are interested in `roll` and `pitch`. `Roll` for rotateX and `Pitch` for `rotateY`. Create a `rotateX` and `rotateY` derived values that will return `roll` and `pitch` values and clamp the values between `-Math.PI / 6` and `Math.PI / 6` as a `withSpring`.
+</summary>
+
+```jsx
+const rotateX = useDerivedValue(() => {
+  const { roll } = sensor.sensor.value;
+  const angle = clamp(roll, -Math.PI / 6, Math.PI / 6);
+  return withSpring(-angle, { damping: 300 });
+});
+const rotateY = useDerivedValue(() => {
+  const { pitch } = sensor.sensor.value;
+  // const angle = clamp(pitch, -Math.PI / 6, Math.PI / 6);
+  // Compensate the "default" angle that a user might hold the phone at :)
+  // 40 degrees to radians
+  const angle = clamp(pitch, -Math.PI / 4, Math.PI) - 40 * (Math.PI / 180);
+  return withSpring(-angle, { damping: 300 });
+});
+```
+
+</details>
+<br />
+<details>
+
+<summary>
+  <b>[4]</b> Apply `rotateX` and `rotateY` to the `<Animated.View />`.
+  ⚠️ TIP: To apply the animation only to the current selected/active item, you can use `interpolate` with `index-1, index, index+1` and add the `rotateX/Y` only for `index` `outputRange`.
+</summary>
+
+```jsx
+const stylez = useAnimatedStyle(() => {
+  return {
+    // ...
+    transform: [
+      {
+        perspective: layout.itemSize * 4,
+      },
+      {
+        rotateY: `${interpolate(
+          scrollX.value,
+          [index - 1, index, index + 1],
+          [0, rotateX.value, 0],
+          Extrapolation.CLAMP
+        )}rad`,
+      },
+      {
+        rotateX: `${interpolate(
+          scrollX.value,
+          [index - 1, index, index + 1],
+          [0, rotateY.value, 0],
+          Extrapolation.CLAMP
+        )}rad`,
+      },
+    ],
+  };
+});
+```
+
+</details>
+<br />
+<details>
+
+<summary>
+  <b>[5]</b> use `rotateX` and `rotateY` to create other derived values, that will apply a `translateX` and `translateY` to the element as well. You can return another spring animation for these new derived values as well.
+</summary>
+
+```jsx
+const translateX = useDerivedValue(() => {
+  return withSpring(-rotateX.value * 100, { damping: 300 });
+});
+const translateY = useDerivedValue(() => {
+  return withSpring(rotateY.value * 100, { damping: 300 });
+});
+
+const stylez = useAnimatedStyle(() => {
+  return {
+    // ...
+    transform: [
+      {
+        perspective: layout.itemSize * 4,
+      },
+      // ...rotateX, rotateY
+      {
+        translateY: interpolate(
+          scrollX.value,
+          [index - 1, index, index + 1],
+          [0, translateY.value, 0],
+          Extrapolation.CLAMP
+        ),
+      },
+      {
+        translateX: interpolate(
+          scrollX.value,
+          [index - 1, index, index + 1],
+          [0, translateX.value, 0],
+          Extrapolation.CLAMP
+        ),
+      },
+    ],
+  };
+});
+```
+
+</details>
+<br />

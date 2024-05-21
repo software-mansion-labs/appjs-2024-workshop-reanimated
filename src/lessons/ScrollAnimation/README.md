@@ -255,7 +255,7 @@ runOnJS(scrollToLocation)(snapToIndex);
 </details>
 <br/>
 
-## Step 3 - Scroll the SectionList
+## Step 3 - Scroll the knob from SectionList
 
 https://github.com/software-mansion-labs/appjs-2023-workshop-reanimated/assets/2805320/064d6dff-06a0-42fd-b223-ab2adee68ffe
 
