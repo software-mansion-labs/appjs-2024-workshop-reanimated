@@ -35,16 +35,16 @@ const tabRef = useAnimatedRef<View>()
 ```tsx
 type TabsProps = {
   // other props
-  onActive: (measurements: MeasuredDimensions) => void
-}
+  onActive: (measurements: MeasuredDimensions) => void;
+};
 
 const sendMeasurements = () => {
   runOnUI(() => {
-    'worklet'
-    const measurements = measure(tabRef)
-    runOnJS(onActive)(measurements)
-  })()
-}
+    "worklet";
+    const measurements = measure(tabRef);
+    runOnJS(onActive)(measurements);
+  })();
+};
 ```
 
 </details>
@@ -96,8 +96,8 @@ useEffect(() => {
 </summary>
 
 ```tsx
-import type { MeasuredDimensions } from 'react-native-reanimated/src/reanimated2/commonTypes'
-const tabMeasurements = (useSharedValue < MeasuredDimensions) | (null > null)
+import type { MeasuredDimensions } from "react-native-reanimated";
+const tabMeasurements = useSharedValue<MeasuredDimensions | null>(null);
 ```
 
 </details>
@@ -112,7 +112,7 @@ const tabMeasurements = (useSharedValue < MeasuredDimensions) | (null > null)
 <Tab
   // the other props
   onActive={(measurements) => {
-    tabMeasurements.value = measurements
+    tabMeasurements.value = measurements;
   }}
 />
 ```
@@ -131,12 +131,12 @@ const tabMeasurements = (useSharedValue < MeasuredDimensions) | (null > null)
 </summary>
 
 ```tsx
-<Indicator selectedTabMeasurements={tabMeasurements} />
+<Indicator selectedTabMeasurements={tabMeasurements} />;
 
 function Indicator({
   selectedTabMeasurements,
 }: {
-  selectedTabMeasurements: SharedValue<MeasuredDimensions | null>
+  selectedTabMeasurements: SharedValue<MeasuredDimensions | null>;
 }) {}
 ```
 
@@ -150,16 +150,16 @@ function Indicator({
 ```tsx
 const stylez = useAnimatedStyle(() => {
   if (!selectedTabMeasurements?.value) {
-    return {}
+    return {};
   }
 
-  const { x, width } = selectedTabMeasurements.value
+  const { x, width } = selectedTabMeasurements.value;
 
   return {
     left: withTiming(x),
     width: withTiming(width),
-  }
-})
+  };
+});
 ```
 
 </details>
@@ -204,12 +204,12 @@ const scrollViewRef = useAnimatedRef<ScrollView>()
 ```tsx
 const scrollToTab = (index: number) => {
   runOnUI(() => {
-    'worklet'
+    "worklet";
 
-    const scrollViewDimensions: MeasuredDimensions = measure(scrollViewRef)
+    const scrollViewDimensions: MeasuredDimensions = measure(scrollViewRef);
 
     if (!scrollViewDimensions || !tabMeasurements.value) {
-      return
+      return;
     }
 
     scrollTo(
@@ -218,10 +218,10 @@ const scrollToTab = (index: number) => {
         // this is how to place the item in the middle
         (scrollViewDimensions.width - tabMeasurements.value.width) / 2,
       0,
-      true,
-    )
-  })()
-}
+      true
+    );
+  })();
+};
 ```
 
 </details>
@@ -235,7 +235,7 @@ const scrollToTab = (index: number) => {
 ```tsx
 // call onChangeTab after `scrollTo` is called.
 if (onChangeTab) {
-  runOnJS(onChangeTab)(index)
+  runOnJS(onChangeTab)(index);
 }
 ```
 
@@ -289,7 +289,7 @@ change `selectedTabIndex` whenever the slide inside the `FlatList` has changed (
 <FlatList
   // other props
   onMomentumScrollEnd={(ev) => {
-    setSelectedTabIndex(Math.floor(ev.nativeEvent.contentOffset.x / width))
+    setSelectedTabIndex(Math.floor(ev.nativeEvent.contentOffset.x / width));
   }}
 />
 ```
