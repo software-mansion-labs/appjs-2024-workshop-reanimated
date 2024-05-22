@@ -65,7 +65,7 @@ height = 200
 number_of_elements = 10
 element_height = height / number_of_elements = 20
 position = 50
-scrollingIndex = height / number_of_elements = 2.5
+scrollingIndex = position / element_height = 2.5
 // We can asume that
 active_element = round(scrollingIndex)
 scrolling_position is between [2,3]
