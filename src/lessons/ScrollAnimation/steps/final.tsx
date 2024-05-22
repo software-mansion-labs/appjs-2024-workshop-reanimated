@@ -2,12 +2,13 @@ import { ContactsListHeader } from "@/components/ContactsListHeader";
 import { ContactsListItem } from "@/components/ContactsListItem";
 import { Container } from "@/components/Container";
 import { alphabet, contacts, ContactSection } from "@/lib/mock";
-import { clamp, hitSlop } from "@/lib/reanimated";
+import { hitSlop } from "@/lib/reanimated";
 import { colorShades, layout } from "@/lib/theme";
 import { useMemo, useRef } from "react";
 import { SectionList, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
+  clamp,
   Extrapolation,
   interpolate,
   measure,

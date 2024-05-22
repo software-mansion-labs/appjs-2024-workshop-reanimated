@@ -104,7 +104,7 @@ const aRef = useAnimatedRef<View>();
   <b>[2]</b> Update <code>onChange</code> implementation to retrieve width of the progress bar and to clamp the knob position such that it never exceeds the width or goes below 0.
 </summary>
 
-We can use `clamp` method from `@/lib/reanimated` helper file to implement `onChange` handler as follows:
+We can use `clamp` method from `react-native-reanimated` helper file to implement `onChange` handler as follows:
 
 ```tsx
 const panGesture = Gesture.Pan().onChange((ev) => {

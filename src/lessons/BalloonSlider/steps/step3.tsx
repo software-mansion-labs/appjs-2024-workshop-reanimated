@@ -1,9 +1,11 @@
 import { Container } from "@/components/Container";
-import { clamp, hitSlop } from "@/lib/reanimated";
+import { hitSlop } from "@/lib/reanimated";
 import { colorShades, layout } from "@/lib/theme";
 import { StyleSheet, Text, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
+  Extrapolation,
+  clamp,
   interpolate,
   measure,
   useAnimatedRef,
