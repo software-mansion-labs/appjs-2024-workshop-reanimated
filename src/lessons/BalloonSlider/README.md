@@ -70,9 +70,9 @@ const styles = StyleSheet.create({
 ## Step 2 – Synchronous measure
 
 In this step we will update the code such that it only allows for a movement within the boundaries of the progress bar.
-We will use [Reanimated's synchronous `measure`](https://docs.swmansion.com/react-native-reanimated/docs/api/nativeMethods/measure) in order to get the dimension of the progress bar, such that we can use it as the upper bound for the position when processing pan gesture event.
+We will use [Reanimated's synchronous `measure`](https://docs.swmansion.com/react-native-reanimated/docs/advanced/measure/) in order to get the dimension of the progress bar, such that we can use it as the upper bound for the position when processing pan gesture event.
 
-In order to measure views synchronoulsy in Reanimated you need an [animated ref object](https://docs.swmansion.com/react-native-reanimated/docs/api/hooks/useAnimatedRef) that is assigned to a component that you want to measure:
+In order to measure views synchronoulsy in Reanimated you need an [animated ref object](https://docs.swmansion.com/react-native-reanimated/docs/core/useAnimatedRef) that is assigned to a component that you want to measure:
 
 ```js
 const aref = useAnimatedRef();
