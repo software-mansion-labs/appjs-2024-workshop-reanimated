@@ -40,7 +40,6 @@ type TabsProps = {
 
 const sendMeasurements = () => {
   runOnUI(() => {
-    "worklet";
     const measurements = measure(tabRef);
     runOnJS(onActive)(measurements);
   })();
@@ -204,8 +203,6 @@ const scrollViewRef = useAnimatedRef<ScrollView>()
 ```tsx
 const scrollToTab = (index: number) => {
   runOnUI(() => {
-    "worklet";
-
     const scrollViewDimensions: MeasuredDimensions = measure(scrollViewRef);
 
     if (!scrollViewDimensions || !tabMeasurements.value) {
