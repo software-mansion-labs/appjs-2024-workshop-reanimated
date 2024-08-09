@@ -198,7 +198,7 @@ const animatedStyle = useAnimatedStyle(() => {
   <br/>
 
 ```jsx
-const gestures = Gesture.Simultaneous(tapGesture. panGesture)
+const gestures = Gesture.Simultaneous(tapGesture, panGesture)
 
 <GestureDetector gesture={gestures}>
   //
