@@ -4,29 +4,29 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-navigation/native": "^6.0.2",
-    "@shopify/react-native-skia": "1.2.3",
-    "expo": "^51.0.25",
-    "expo-router": "~3.5.21",
-    "expo-splash-screen": "~0.27.5",
-    "expo-status-bar": "~1.12.1",
-    "react": "18.2.0",
-    "react-native": "0.74.5",
-    "react-native-gesture-handler": "~2.16.1",
-    "react-native-reanimated": "~3.10.1",
-    "react-native-safe-area-context": "4.10.5",
-    "react-native-screens": "3.31.1",
+    "@react-navigation/native": "^7.0.14",
+    "@shopify/react-native-skia": "1.5.0",
+    "expo": "^52.0.37",
+    "expo-router": "~4.0.17",
+    "expo-splash-screen": "~0.29.22",
+    "expo-status-bar": "~2.0.1",
+    "react": "18.3.1",
+    "react-native": "0.76.7",
+    "react-native-gesture-handler": "~2.20.2",
+    "react-native-reanimated": "~3.16.1",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "~4.4.0",
     "react-native-section-list-get-item-layout": "^2.2.3",
-    "react-native-svg": "15.2.0"
+    "react-native-svg": "15.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/react": "~18.2.45",
+    "@types/react": "~18.3.12",
     "typescript": "~5.3.3"
   },
   "private": true
