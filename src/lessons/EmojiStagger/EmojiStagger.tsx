@@ -20,14 +20,16 @@ export function EmojiStaggerLesson({ message }: Props) {
           styles.message,
           message.from === "me" ? styles.messageMe : styles.messageThem,
         ]}
-        onPress={() => setCurrentPopupId(message.id)}>
+        onPress={() => setCurrentPopupId(message.id)}
+      >
         <Text
           style={[
             styles.messageText,
             message.from === "me"
               ? styles.messageTextMe
               : styles.messageTextThem,
-          ]}>
+          ]}
+        >
           {message.message}
         </Text>
       </Pressable>
