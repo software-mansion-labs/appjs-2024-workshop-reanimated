@@ -11,9 +11,11 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={{ padding: layout.spacing * 2 }}>
         {routes.map((route) => (
           <TouchableOpacity
+            // @ts-ignore
             onPress={() => router.navigate(route.href)}
             key={route.href}
-            style={styles.button}>
+            style={styles.button}
+          >
             <Text style={styles.title}>{route.title}</Text>
             <Text style={styles.subtitle}>{route.subtitle}</Text>
           </TouchableOpacity>
